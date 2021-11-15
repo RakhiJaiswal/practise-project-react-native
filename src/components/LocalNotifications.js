@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import PushNotification, {Importance} from 'react-native-push-notification';
 
 const LocalNotifications = () => {
@@ -17,10 +17,9 @@ const LocalNotifications = () => {
   );
 
   const notify = () => {
-    console.log('herenotify');
     PushNotification.localNotificationSchedule({
       channelId: 'channel-id123',
-      message: 'My Notification Message',
+      message: 'Where are you going? Come back!',
       date: new Date(Date.now() + 1 * 10000),
       allowWhileIdle: true,
       repeatTime: 1,
@@ -29,11 +28,11 @@ const LocalNotifications = () => {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <TouchableOpacity onPress={() => notify()}>
-        <Text>Remind me</Text>
+        <Text>Click me</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 

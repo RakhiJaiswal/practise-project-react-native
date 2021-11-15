@@ -27,6 +27,7 @@ const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
   PushNotification.configure({
     onRegister: function (token) {
       console.log('TOKEN:', token);
@@ -44,6 +45,7 @@ const App = () => {
     popInitialNotification: true,
     requestPermissions: Platform.OS === 'ios',
   });
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
