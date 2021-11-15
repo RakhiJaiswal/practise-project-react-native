@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler';
+
 import React from 'react';
 import {
   NavigationContainer,
@@ -13,7 +15,6 @@ import {PersistGate} from 'redux-persist/integration/react';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
 import {Platform} from 'react-native';
-import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 export const navigationRef = createNavigationContainerRef();
@@ -44,7 +45,10 @@ const App = () => {
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator
             initialRouteName="Home"
-            screenOptions={{headerBackTitle: 'Back'}}>
+            screenOptions={{
+              headerBackTitle: 'Back',
+              gestureEnabled: true,
+            }}>
             <Stack.Screen name="Welcome" component={Home} />
             {ComponentScreen.map(screen => (
               <Stack.Screen

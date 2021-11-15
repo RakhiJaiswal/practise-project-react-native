@@ -88,6 +88,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <FlatList
+        bounces={false}
         data={components}
         showsVerticalScrollIndicator={false}
         keyExtractor={index => index}
