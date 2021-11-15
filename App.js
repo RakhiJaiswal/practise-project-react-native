@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   NavigationContainer,
   createNavigationContainerRef,
@@ -16,12 +16,17 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
 import {Platform} from 'react-native';
 
+import SplashScreen from 'react-native-splash-screen';
+
 const Stack = createNativeStackNavigator();
 export const navigationRef = createNavigationContainerRef();
 
 const ComponentScreen = [...ComponentScreens];
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   PushNotification.configure({
     onRegister: function (token) {
       console.log('TOKEN:', token);
@@ -48,6 +53,7 @@ const App = () => {
             screenOptions={{
               headerBackTitle: 'Back',
               gestureEnabled: true,
+              animation: 'slide_from_right',
             }}>
             <Stack.Screen name="Welcome" component={Home} />
             {ComponentScreen.map(screen => (
