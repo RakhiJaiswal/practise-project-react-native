@@ -1,5 +1,8 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Home from './src/screens/Home';
@@ -10,8 +13,10 @@ import {PersistGate} from 'redux-persist/integration/react';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
 import {Platform} from 'react-native';
+import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
+export const navigationRef = createNavigationContainerRef();
 
 const ComponentScreen = [...ComponentScreens];
 
@@ -33,13 +38,14 @@ const App = () => {
     popInitialNotification: true,
     requestPermissions: Platform.OS === 'ios',
   });
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={Home} />
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{headerBackTitle: 'Back'}}>
+            <Stack.Screen name="Welcome" component={Home} />
             {ComponentScreen.map(screen => (
               <Stack.Screen
                 name={screen.screenName}

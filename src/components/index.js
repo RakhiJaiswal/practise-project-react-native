@@ -11,6 +11,11 @@ import ApiData from './ApiData';
 import Localisation from './Localisation';
 import TextToSpeech from './TextToSpeech';
 import SpeechToText from './SpeechToText';
+import BackgroundVideo from './BackgroundVideo';
+import Charts from './Charts';
+import TreePath from './TreePath';
+import Screen1 from './TreePath/Screen1';
+import Screen2 from './TreePath/Screen2';
 
 export default [
   ...ParallaxHeader,
@@ -26,4 +31,9 @@ export default [
   ...Localisation,
   ...TextToSpeech,
   ...SpeechToText,
+  ...BackgroundVideo,
+  ...Charts,
+  ...TreePath,
+  ...Screen1,
+  ...Screen2,
 ];

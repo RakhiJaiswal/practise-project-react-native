@@ -26,13 +26,11 @@ const Home = () => {
     'Localisation',
     'Text To Speech',
     'Speech To Text',
+    'Background Video',
+    'Charts',
+    'Tree Path',
   ];
   const color = useSelector(state => state.ThemeReducer.color);
-
-  console.log(
-    useSelector(state => state.ThemeReducer),
-    'storeee',
-  );
 
   const itemPressed = val => {
     switch (val) {
@@ -74,6 +72,15 @@ const Home = () => {
         break;
       case 'Speech To Text':
         navigation.navigate('SpeechToText');
+        break;
+      case 'Background Video':
+        navigation.navigate('BackgroundVideo');
+        break;
+      case 'Charts':
+        navigation.navigate('Charts');
+        break;
+      case 'Tree Path':
+        navigation.navigate('TreePath');
         break;
     }
   };

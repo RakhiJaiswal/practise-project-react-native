@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import RootReducer from './reducer/RootReducer';
 import createSagaMiddleware from '@redux-saga/core';
 import rootSaga from './saga';
+import {logger} from 'redux-logger';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,10 +16,11 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, RootReducer);
+const middleWares = [sagaMiddleware, logger];
 
 export const store = createStore(
   persistedReducer,
-  applyMiddleware(sagaMiddleware),
+  applyMiddleware(...middleWares),
 );
 
 sagaMiddleware.run(rootSaga);

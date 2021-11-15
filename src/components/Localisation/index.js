@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, Pressable, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import {LanguageAction} from '../../store/actions/ThemeAction';
+import {ResponsiveSize} from '../../utils/ResponsiveSize';
 import enData from './English.json';
 import spData from './Spanish.json';
 
@@ -12,23 +13,29 @@ const Localisation = () => {
   const dispatch = useDispatch();
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <Text>Choose Language </Text>
-      <View style={{padding: 10, flexDirection: 'row'}}>
-        <TouchableOpacity
-          style={{backgroundColor: 'yellow', padding: 10}}
+    <SafeAreaView style={styles.mainContainer}>
+      <Text style={styles.chooseText}>Choose Language</Text>
+      <View style={styles.languageView}>
+        <Pressable
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            ...styles.option,
+            backgroundColor: language === 'English' ? 'yellow' : 'transparent',
+          }}
           onPress={() => dispatch(LanguageAction('English'))}>
           <Text> English</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{backgroundColor: 'pink', padding: 10}}
+        </Pressable>
+        <Pressable
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            ...styles.option,
+            backgroundColor: language === 'Spanish' ? 'yellow' : 'transparent',
+          }}
           onPress={() => dispatch(LanguageAction('Spanish'))}>
           <Text> Spanish</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
-      <Text>
-        language Selected : {language} {`\n`}
-      </Text>
+
       <Text>{languageObj.hi}</Text>
       <Text>{languageObj.press_me}</Text>
       <Text>{languageObj.selectedText}</Text>
@@ -37,3 +44,22 @@ const Localisation = () => {
 };
 
 export default [{screenName: 'Localisation', componentName: Localisation}];
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+  },
+  chooseText: {
+    fontSize: ResponsiveSize(20),
+  },
+  languageView: {
+    padding: ResponsiveSize(5),
+    flexDirection: 'row',
+    backgroundColor: 'orange',
+    borderRadius: ResponsiveSize(25),
+    marginVertical: ResponsiveSize(30),
+  },
+  option: {padding: ResponsiveSize(10), borderRadius: ResponsiveSize(20)},
+});
